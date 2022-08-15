@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+
+	<class name="digiwallboard.Staro.Polica" table="polica">
+        <id name="id" type="int">
+            <column name="id"></column>
+        </id>
+        
+        
+        <property name="ime_pol" column="ime_pol"
+            type="java.lang.String">
+             <column name="ime_pol"></column>
+        </property>
+        
+ </class>
+
+</hibernate-mapping>

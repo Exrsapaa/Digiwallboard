@@ -1,0 +1,78 @@
+package digiwallboard.Staro;
+
+import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
+
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.engine.spi.EntityKey;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.persister.entity.EntityPersister;
+import org.hibernate.query.Query;
+import org.hibernate.service.ServiceRegistry;
+
+import digiwallboard.Entity.Polica;
+import jakarta.persistence.PersistenceContext;
+
+
+public class Main {
+	
+	private static SessionFactory sessionFactory;
+	private static StandardServiceRegistryBuilder serviceRegistry;
+	public static Object getFromSession
+	(Serializable identifier, Class<?> clazz, Session s) {              
+		String entityName = clazz.getName();
+		if(identifier == null) {
+		   return null;
+		}      
+		SessionImplementor sessionImpl = (SessionImplementor) s;
+		EntityPersister entityPersister = sessionImpl.getFactory().getEntityPersister(entityName);
+		PersistenceContext persistenceContext = sessionImpl.getPersistenceContext();
+		EntityKey entityKey = new EntityKey(identifier, entityPersister, EntityMode.POJO);
+		Object entity = persistenceContext.getEntity(entityKey);
+		return entity;
+		}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Session session = null;
+	    try
+	    {
+	        try
+	        {
+	            Configuration cfg= new Configuration().addAnnotatedClass(Polica.class);
+	            cfg.configure("Polica.cfg.xml");
+	            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties());
+	            sessionFactory = cfg.buildSessionFactory(serviceRegistry.build());
+	        }
+	        catch(Throwable th)
+	        {
+	            System.err.println("Failed to create sessionFactory object."
+	            + th);
+	            throw new ExceptionInInitializerError(th);
+	        }
+	        session = sessionFactory.openSession();
+	        
+	       // Query query = session.createQuery("select count(p) from Polica p");
+	        Query<Polica> result = session.createQuery("FROM Polica", Polica.class);
+	        List<Polica> result1 = result.getResultList();
+	       // Iterator count = query.iterate();
+	        System.out.println("No. of rows : "+ result1); 
+	    }
+	    catch(Exception e)
+	    {
+	        System.out.println(e.getMessage());
+	    }
+	    finally
+	    {
+	        session.close();
+	    }
+	    }
+		
+	}
+

@@ -1,0 +1,59 @@
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import digiwallboard.Entity.*;
+
+public class main {
+	
+	private static SessionFactory sessionFactory;
+	private static StandardServiceRegistryBuilder serviceRegistry;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Session session = null;
+		    try
+		    {
+		        try
+		        {
+		            Configuration cfg= new Configuration().configure();
+		            cfg.addAnnotatedClass(Polica.class);
+		            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties());
+		            sessionFactory = cfg.buildSessionFactory(serviceRegistry.build());
+		        }
+		        catch(Throwable th)
+		        {
+		            System.err.println("Failed to create sessionFactory object."
+		            + th);
+		            throw new ExceptionInInitializerError(th);
+		        }
+		        session = sessionFactory.openSession();
+		        Query result = session.createQuery("select count(*) from Polica", Polica.class);
+		        Long count = (Long)result.uniqueResult();
+		        /*
+		        for(Polica p : result1) {
+		            System.out.println("-" + p.toString());
+		        }
+		        */
+		        //Query query = session.createQuery("select count(p) from Polica p");
+		        //Iterator count = query.iterate();
+		        System.out.println(count); 
+		    }
+		    catch(Exception e)
+		    {
+		        System.out.println(e.getMessage());
+		    }
+		    finally
+		    {
+		        session.close();
+		    }
+		   }
+	}
+
+

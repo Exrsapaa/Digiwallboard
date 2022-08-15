@@ -1,0 +1,57 @@
+package digiwallboard.Entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Polica")
+public class Polica {
+    
+    @Id
+    @Column(name="id")
+    private int id;
+    @Column(name="ime_pol")
+    private String ime_pol;
+    
+
+    public Polica() {
+        
+    }
+
+    public Polica(int id, String ime_pol) {
+        super();
+        this.id = id;
+        this.ime_pol = ime_pol;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public String getIme_pol() {
+        return ime_pol;
+    }
+
+
+    public void setIme_pol(String ime_pol) {
+        this.ime_pol = ime_pol;
+    }
+
+    @Override
+    public String toString() {
+        return "Polica [id=" + id + ", ime_pol=" + ime_pol + "]";
+    }
+
+    
+}

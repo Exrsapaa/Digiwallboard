@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="digiwallboard.Entity.Polica">
+        <id name="id" type="int">
+            <column name="id" />
+            
+        </id>
+        <property generated="never" lazy="false" name="ime_pol"
+            type="java.lang.String">
+            <column name="ime_pol" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

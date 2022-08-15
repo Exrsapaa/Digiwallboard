@@ -1,0 +1,16 @@
+import digiwallboard.Entity.*;
+
+import java.util.List;
+
+import digiwallboard.DAO.*;
+import digiwallboard.Service.PolicaService;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+	}
+
+}

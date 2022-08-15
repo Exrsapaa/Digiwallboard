@@ -1,0 +1,33 @@
+import digiwallboard.Entity.*;
+
+import java.util.List;
+
+import digiwallboard.DAO.*;
+import digiwallboard.Service.PolicaService;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		// TODO Auto-generated method stub
+		/*
+		PolicaService policaService = new PolicaService();
+		        
+		        
+		        List<Polica> pol = policaService.findAll();
+		        
+		        for(Polica p : pol) {
+		            System.out.println("-" + p.toString());
+		        }
+		    }
+		    */
+		
+		PolicaDAO2 p = new PolicaDAO2();
+		
+		p.getSessionFactory();
+		
+		p.findAll();
+	}
+}
+
+

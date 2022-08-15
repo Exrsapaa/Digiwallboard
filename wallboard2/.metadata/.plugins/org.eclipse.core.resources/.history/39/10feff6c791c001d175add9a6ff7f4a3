@@ -1,0 +1,12 @@
+package digiwallboard.Service;
+
+import java.util.List;
+
+import digiwallboard.DAO.PolicaDAO2;
+import digiwallboard.Entity.Polica;
+
+public interface PolicaDaoInterface<T, Id extends Serializable> {
+    
+    public List<T> findAll();
+
+}

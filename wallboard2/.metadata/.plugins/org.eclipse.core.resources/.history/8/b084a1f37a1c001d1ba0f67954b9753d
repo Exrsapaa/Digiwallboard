@@ -1,0 +1,5 @@
+package digiwallboard.Util;
+
+public class HibernateUtil {
+
+}

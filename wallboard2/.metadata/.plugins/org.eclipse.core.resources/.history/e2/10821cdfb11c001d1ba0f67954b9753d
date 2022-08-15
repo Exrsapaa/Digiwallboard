@@ -1,0 +1,23 @@
+
+import java.util.Iterator;
+import java.util.List;
+
+
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
+
+public class main {
+	
+	private static SessionFactory sessionFactory;
+	private static ServiceRegistry serviceRegistry;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

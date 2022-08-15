@@ -1,0 +1,103 @@
+package digiwallboard.DAO;
+
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import digiwallboard.Entity.Polica;
+
+public class PolicaDAO2 implements PolicaDaoInterface<Polica, String> {
+    
+    private Session currentSession;
+    
+    private Transaction currentTransaction;
+ 
+    public PolicaDAO2() {
+        
+    }
+ 
+    public Session openCurrentSession() {
+        currentSession = getSessionFactory().openSession();
+        return currentSession;
+    }
+ 
+    public Session openCurrentSessionwithTransaction() {
+        currentSession = getSessionFactory().openSession();
+        currentTransaction = currentSession.beginTransaction();
+        return currentSession;
+    }
+     
+    public void closeCurrentSession() {
+        currentSession.close();
+    }
+     
+    public void closeCurrentSessionwithTransaction() {
+        currentTransaction.commit();
+        currentSession.close();
+    }
+     
+    private static SessionFactory getSessionFactory() {
+        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+        configuration.addAnnotatedClass(Polica.class);
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties());
+        SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
+        return sessionFactory;
+    }
+ 
+    public Session getCurrentSession() {
+        return currentSession;
+    }
+ 
+    public void setCurrentSession(Session currentSession) {
+        this.currentSession = currentSession;
+    }
+ 
+    public Transaction getCurrentTransaction() {
+        return currentTransaction;
+    }
+ 
+    public void setCurrentTransaction(Transaction currentTransaction) {
+        this.currentTransaction = currentTransaction;
+    }
+ 
+    
+    public void persist(Polica entity) {
+        getCurrentSession().persist(entity);
+    }
+  
+    
+    public List<Polica> findAll() {
+        SessionFactory factory = getSessionFactory();
+        Session session = openCurrentSession();
+        
+        getSessionFactory();
+        
+        //TypedQuery<Polica> result = (TypedQuery<Polica>) openCurrentSession().createQuery("FROM Polica");
+        Query<Polica> result = session.createQuery("FROM Polica", Polica.class);
+        List<Polica> result1 = result.getResultList();
+        
+        closeCurrentSession();
+        /*
+        Query query = getCurrentSession().createQuery("select * from Polica");
+        
+        List<Polica> pol = (List<Polica>) getCurrentSession().createNativeQuery("from Polica").list();
+        return pol;
+        
+        */
+        return result1;
+        
+        /*
+        TypedQuery<Polica> query = createQuery( "select * from Polica");
+               
+        return query.getResultList();
+        */
+    }
+}
