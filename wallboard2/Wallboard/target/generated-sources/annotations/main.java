@@ -43,7 +43,7 @@ public class main {
 		        */
 		        //Query query = session.createQuery("select count(p) from Polica p");
 		        //Iterator count = query.iterate();
-		        System.out.println(count); 
+		        System.out.println("Število polic: " + count); 
 		    }
 		    catch(Exception e)
 		    {
